@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, g
 from werkzeug.urls import url_quote
 import mysql.connector
 
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+app = Flask(__name__, template_folder='../../templates', static_folder='../../static')
 app.secret_key = "vlanz"
 
 AUTHENTICATION_MICROSERVICE_URL = "http://127.0.0.1:5001"
@@ -10,7 +10,7 @@ CUSTOMER_MICROSERVICE_URL = "http://127.0.0.1:5002"
 FREELANCER_MICROSERVICE_URL = "http://127.0.0.1:5003"
 
 db = mysql.connector.connect(
-    host="localhost",
+    host="mysql-db",
     user="root",
     password="tree2003",
     database="253_265_284_309"

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freelancer-deployment
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: freelancer
+  template:
+    metadata:
+      labels:
+        app: freelancer
+    spec:
+      containers:
+      - name: freelancer
+        image: freelancer-service:latest 
+        ports:
+        - containerPort: 5003
