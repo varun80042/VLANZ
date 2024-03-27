@@ -1,6 +1,6 @@
 # Building a Microservices Application on Cloud using Docker, Kubernetes, Jenkins and Git.
 
-### Microservices Overview
+## Microservices Overview
 
 - **Authentication -** The Authentication Service is responsible for handling user authentication and authorization. It provides endpoints for user registration and login.
 - **Customer -** The Customer Service manages customer-related operations within the application. It handles buying services, cancelling orders and viewing order history.
