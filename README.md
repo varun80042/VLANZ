@@ -3,7 +3,9 @@
 ### Microservices Overview
 
 **Authentication -** The Authentication Service is responsible for handling user authentication and authorization. It provides endpoints for user registration and login.
+<br/>
 **Customer -** The Customer Service manages customer-related operations within the application. It handles buying services, cancelling orders and viewing order history.
+<br/>
 **Freelancer -** The Freelancer Service handles operations related to freelancers. It manages freelancer profiles along with their ability to add, delete or update services.
 
 ```bash
