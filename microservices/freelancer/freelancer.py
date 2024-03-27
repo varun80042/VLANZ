@@ -12,7 +12,7 @@ FREELANCER_MICROSERVICE_URL = "http://127.0.0.1:5003"
 db = mysql.connector.connect(
     host="mysql-db",
     user="root",
-    password="tree2003",
+    password="password",
     database="253_265_284_309"
 )
 
