@@ -10,6 +10,16 @@ pipeline {
     }
     
     stages {
+
+        stage('Clone repository') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/varun80042/253_265_284_309_Building-an-E-commerce-Microservices-Application-on-Cloud']]
+                ])
+            }
+        }
+
         stage('Authentication Build') {
             steps {
                 script {
