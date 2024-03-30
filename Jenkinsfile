@@ -24,6 +24,19 @@ pipeline {
             steps {
                 // Run tests for the authentication microservice
                 // Add your testing commands here
+                script {
+                    sh """
+                        # Install dependencies
+                        pip install pytest requests
+                        
+                        # Run unit tests
+                        pytest tests/unit/test_authentication.py
+                        
+                        # Run integration tests
+                        pytest tests/integration/test_authentication_integration.py
+                    """
+        }
+
             }
         }
         
