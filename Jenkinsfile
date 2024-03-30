@@ -22,8 +22,6 @@ pipeline {
         
         stage('Authentication Test') {
             steps {
-                // Run tests for the authentication microservice
-                // Add your testing commands here
                 script {
                     sh """
                         # Install dependencies
@@ -35,8 +33,7 @@ pipeline {
                         # Run integration tests
                         pytest tests/integration/test_authentication_integration.py
                     """
-        }
-
+                }
             }
         }
         
@@ -64,8 +61,21 @@ pipeline {
         
         stage('Freelancer Test') {
             steps {
-                // Run tests for the freelancer microservice
-                // Add your testing commands here
+                script {
+                    sh """
+                        # Navigate to the directory containing the test files
+                        cd microservices/freelancer
+        
+                        # Install dependencies
+                        pip install pytest requests
+                        
+                        # Run unit tests
+                        pytest tests/unit/test_freelancer.py
+                        
+                        # Run integration tests
+                        pytest tests/integration/test_freelancer_integration.py
+                    """
+                }
             }
         }
         
@@ -93,8 +103,21 @@ pipeline {
         
         stage('Customer Test') {
             steps {
-                // Run tests for the customer microservice
-                // Add your testing commands here
+                script {
+                    sh """
+                        # Navigate to the directory containing the test files
+                        cd microservices/customer
+        
+                        # Install necessary dependencies
+                        pip install pytest requests
+        
+                        # Run unit tests
+                        pytest tests/unit/test_customer.py
+        
+                        # Run integration tests
+                        pytest tests/integration/test_customer_integration.py
+                    """
+                }
             }
         }
         
