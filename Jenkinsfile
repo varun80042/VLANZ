@@ -2,11 +2,16 @@ pipeline {
     agent any
     
     stages {
-        stage('Checkout') {
+       stage('Checkout SCM') {
             steps {
                 script {
                     // Clone the repository
-                    git 'https://github.com/varun80042/253_265_284_309_Building-an-E-commerce-Microservices-Application-on-Cloud.git'
+                    checkout([$class: 'GitSCM', 
+                              branches: [[name: '*/main']], 
+                              doGenerateSubmoduleConfigurations: false, 
+                              extensions: [], 
+                              submoduleCfg: [], 
+                              userRemoteConfigs: [[url: 'https://github.com/varun80042/253_265_284_309_Building-an-E-commerce-Microservices-Application-on-Cloud.git']]])
                 }
             }
         }
