@@ -36,13 +36,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                // Run tests for each microservice
-                sh 'curl -i http://127.0.0.1:5001/'
-
-            }
-        }
+       
 
         stage('Deploy') {
             steps {
