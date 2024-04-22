@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Testing') {
             steps {
                 // Run tests for each microservice
                 sh 'docker run authentication-service'
