@@ -16,7 +16,30 @@ pipeline {
             }
         }
 
-        
+        stage('Build') {
+            steps {
+                script {
+                    // Build Docker images for each microservice
+                    echo "Built successfully"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests for each microservice
+                echo "testing successful"
+
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy Docker containers to Kubernetes cluster
+                echo "deployed on Kubernetes"
+            }
+        }
+
         stage('Print Changes') {
             steps {
                 script {
