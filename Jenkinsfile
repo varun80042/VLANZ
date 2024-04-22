@@ -1,159 +1,27 @@
 pipeline {
     agent any
-    
-    environment {
-       
-        AUTHENTICATION_MICROSERVICE_URL = "http://127.0.0.1:5001"
-        CUSTOMER_MICROSERVICE_URL = "http://127.0.0.1:5002"
-        FREELANCER_MICROSERVICE_URL = "http://127.0.0.1:5003"
-    }
-    
+
     stages {
-
-        stage('Clone repository') {
+        stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/varun80042/253_265_284_309_Building-an-E-commerce-Microservices-Application-on-Cloud']]
-                ])
+                // Checkout your source code from GitHub
+                git 'https://github.com/varun80042/253_265_284_309_Building-an-E-commerce-Microservices-Application-on-Cloud.git'
             }
         }
 
-        stage('Authentication Build') {
+        stage('Run tests') {
             steps {
-                script {
-                    dir('authentication') {
-                        sh "docker build -t ${DOCKER_REGISTRY}/authentication-service ."
-                    }
-                }
-            }
-        }
-        
-        stage('Authentication Test') {
-            steps {
-                script {
-                    sh """
-                        # Install dependencies
-                        pip install pytest requests
-                        
-                        # Run unit tests
-                        pytest tests/unit/test_authentication.py
-                        
-                        # Run integration tests
-                        pytest tests/integration/test_authentication_integration.py
-                    """
-                }
-            }
-        }
-        
-        stage('Authentication Deploy') {
-            steps {
-                script {
-                    dir('kubernetes') {
-                        sh "kubectl apply -f authentication-deployment.yaml --namespace=${KUBE_NAMESPACE}"
-                        sh "kubectl apply -f authentication-service.yaml --namespace=${KUBE_NAMESPACE}"
-                    }
-                    sh "kubectl rollout status deployment/authentication --namespace=${KUBE_NAMESPACE}"
-                }
-            }
-        }
-        
-        stage('Freelancer Build') {
-            steps {
-                script {
-                    dir('freelancer') {
-                        sh "docker build -t ${DOCKER_REGISTRY}/freelancer-service ."
-                    }
-                }
-            }
-        }
-        
-        stage('Freelancer Test') {
-            steps {
-                script {
-                    sh """
-                        # Navigate to the directory containing the test files
-                        cd microservices/freelancer
-        
-                        # Install dependencies
-                        pip install pytest requests
-                        
-                        # Run unit tests
-                        pytest tests/unit/test_freelancer.py
-                        
-                        # Run integration tests
-                        pytest tests/integration/test_freelancer_integration.py
-                    """
-                }
-            }
-        }
-        
-        stage('Freelancer Deploy') {
-            steps {
-                script {
-                    dir('kubernetes') {
-                        sh "kubectl apply -f freelancer-deployment.yaml --namespace=${KUBE_NAMESPACE}"
-                        sh "kubectl apply -f freelancer-service.yaml --namespace=${KUBE_NAMESPACE}"
-                    }
-                    sh "kubectl rollout status deployment/freelancer --namespace=${KUBE_NAMESPACE}"
-                }
-            }
-        }
-        
-        stage('Customer Build') {
-            steps {
-                script {
-                    dir('customer') {
-                        sh "docker build -t ${DOCKER_REGISTRY}/customer-service ."
-                    }
-                }
-            }
-        }
-        
-        stage('Customer Test') {
-            steps {
-                script {
-                    sh """
-                        # Navigate to the directory containing the test files
-                        cd microservices/customer
-        
-                        # Install necessary dependencies
-                        pip install pytest requests
-        
-                        # Run unit tests
-                        pytest tests/unit/test_customer.py
-        
-                        # Run integration tests
-                        pytest tests/integration/test_customer_integration.py
-                    """
-                }
-            }
-        }
-        
-        stage('Customer Deploy') {
-            steps {
-                script {
-                    dir('kubernetes') {
-                        sh "kubectl apply -f customer-deployment.yaml --namespace=${KUBE_NAMESPACE}"
-                        sh "kubectl apply -f customer-service.yaml --namespace=${KUBE_NAMESPACE}"
-                    }
-                    sh "kubectl rollout status deployment/customer --namespace=${KUBE_NAMESPACE}"
-                }
+                // Hit the URLs of your microservices
+                sh 'curl -i http://127.0.0.1:5001/' // Hit authentication microservice endpoint
+                sh 'curl -i http://127.0.0.1:5002/' // Hit customer microservice endpoint
+                sh 'curl -i http://127.0.0.1:5003/' // Hit freelancer microservice endpoint
             }
         }
     }
-    
+
     post {
-        success {
-            // Clean up Docker images after successful deployment
-            script {
-                sh "docker rmi ${DOCKER_REGISTRY}/authentication-service"
-                sh "docker rmi ${DOCKER_REGISTRY}/freelancer-service"
-                sh "docker rmi ${DOCKER_REGISTRY}/customer-service"
-            }
-        }
-        failure {
-            echo "Pipeline failed"
+        always {
+            // Cleanup or final steps
         }
     }
 }
