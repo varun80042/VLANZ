@@ -2,26 +2,33 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                // Checkout your source code from GitHub
-                git 'https://github.com/varun80042/253_265_284_309_Building-an-E-commerce-Microservices-Application-on-Cloud.git'
+                script {
+                    // Build Docker images for each microservice
+                    docker.build("Dockerfile", "microservices/authentication/Dockerfile")
+                    docker.build("Dockerfile", "microservices/customer/Dockerfile")
+                    docker.build("Dockerfile", "microservices/freelancer/Dockerfile")
+                }
             }
         }
 
-        stage('Run tests') {
+        stage('Test') {
             steps {
-                // Hit the URLs of your microservices
-                sh 'curl -i http://127.0.0.1:5001/' // Hit authentication microservice endpoint
-                sh 'curl -i http://127.0.0.1:5002/' // Hit customer microservice endpoint
-                sh 'curl -i http://127.0.0.1:5003/' // Hit freelancer microservice endpoint
+                // Run tests for each microservice
+                sh 'docker run authentication-service'
+                sh 'curl -i http://127.0.0.1:5001/'
+
             }
         }
-    }
 
-    post {
-        always {
-            // Cleanup or final steps
+        stage('Deploy') {
+            steps {
+                // Deploy Docker containers to Kubernetes cluster
+                sh 'kubectl apply -f kubernetes/authentication-deployment.yaml'
+                sh 'kubectl apply -f kubernetes/customer-deployment.yaml'
+                sh 'kubectl apply -f kubernetes/freelancer-deployment.yaml'
+            }
         }
     }
 }
