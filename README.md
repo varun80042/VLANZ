@@ -1,4 +1,4 @@
-# Building a Microservices Application on Cloud using Docker, Kubernetes, Jenkins and Git.
+# VLANZ - A freelancing marketplace
 
 ## Microservices Overview
 
