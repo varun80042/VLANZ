@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.search_text {
+  font-family: 'Secular One';
+  font-size: 50px;
+  position: relative;
+  color: white;
+  left: 80px;
+  top: 110px;
+  -webkit-text-stroke: 1px black;
+}
+
+#im {
+  position: relative;
+  left: 242px;
+  top: 128px;
+}
+
+#search_bar{
+  font-family: 'Secular One';
+  font-size: 25px;
+  position: relative;
+  left: 80px;
+  top: 110px;
+  width: 500px;
+  height: 55px;
+  border-radius: 15px;
+  text-indent: 8.8%;
+}
+
+.nav_box {
+  background-color: white;
+  position: fixed;
+  width: 1535px;
+  height: 68px;
+  border: 1px solid black;
+  z-index: 1;
+}
+
+.topnav {
+  position: fixed;
+  left: 1060px;
+  bottom: 650px;
+}
+
+#logo {
+  position: fixed;
+  left: 50px;
+  top: 5px;
+  height: 60px;
+}
+
+.topnav a {
+  float: right;
+  color: black;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 20px;
+  font-family: 'Secular One';
+}
+
+.topnav a:hover {
+  text-decoration: underline;
+}
+
+#search_button {
+  position: relative;
+  left: 65px;
+  top: 110px;
+  height: 65px;
+  background-color: white;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  color: #000000;
+  font-family: 'Secular One';
+  font-size: 20px;
+  padding: 16px;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+
+#search_button:hover {
+  color: rgb(0, 0, 0);
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.sign_in_box {
+  background-color: rgb(208, 208, 208);
+  padding: 3%;
+  height: 300px;
+  width: 300px;
+  position: relative;
+  bottom: 450px;
+  left: 950px;
+  border: 3px solid black;
+  border-radius: 50px;
+}
+
+.signIn {
+    position: relative;
+    bottom: 400px;
+    left: 970px;
+    font-family: 'Secular One';
+    font-size: 50px;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    font-style: italic;
+}
+
+.sign_up_box {
+    background-color: rgb(208, 208, 208);
+    padding: 3%;
+    height: 450px;
+    width: 450px;
+    position: relative;
+    bottom: 520px;
+    left: 880px;
+    border: 3px solid black;
+    border-radius: 50px;
+  }
+
+.signUp {
+    position: relative;
+    bottom: 480px;
+    left: 900px;
+    font-family: 'Secular One';
+    font-size: 50px;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    font-style: italic;
+}
+
+input {
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+
